@@ -1,0 +1,9 @@
+C:\git\dinoroar\TheBeerGame\TheBeerGame.GameEngine\bin\Debug\netcoreapp3.1\TheBeerGame.GameEngine.deps.json
+C:\git\dinoroar\TheBeerGame\TheBeerGame.GameEngine\bin\Debug\netcoreapp3.1\TheBeerGame.GameEngine.dll
+C:\git\dinoroar\TheBeerGame\TheBeerGame.GameEngine\obj\Debug\netcoreapp3.1\TheBeerGame.GameEngine.csprojAssemblyReference.cache
+C:\git\dinoroar\TheBeerGame\TheBeerGame.GameEngine\obj\Debug\netcoreapp3.1\TheBeerGame.GameEngine.AssemblyInfoInputs.cache
+C:\git\dinoroar\TheBeerGame\TheBeerGame.GameEngine\obj\Debug\netcoreapp3.1\TheBeerGame.GameEngine.AssemblyInfo.cs
+C:\git\dinoroar\TheBeerGame\TheBeerGame.GameEngine\bin\Debug\netcoreapp3.1\TheBeerGame.GameEngine.pdb
+C:\git\dinoroar\TheBeerGame\TheBeerGame.GameEngine\obj\Debug\netcoreapp3.1\TheBeerGame.GameEngine.dll
+C:\git\dinoroar\TheBeerGame\TheBeerGame.GameEngine\obj\Debug\netcoreapp3.1\TheBeerGame.GameEngine.pdb
+C:\git\dinoroar\TheBeerGame\TheBeerGame.GameEngine\obj\Debug\netcoreapp3.1\TheBeerGame.GameEngine.csproj.CoreCompileInputs.cache
