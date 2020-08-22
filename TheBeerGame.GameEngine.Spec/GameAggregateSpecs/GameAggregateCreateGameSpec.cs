@@ -5,13 +5,13 @@ using Serilog.Events;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace TheBeerGame.GameEngine.Spec
+namespace TheBeerGame.GameEngine.Spec.GameAggregateSpecs
 {
-    public class GameAggregateCreateGameSpec : AggregateSpecification<GameLobbyAggregate, CreateGame>
+    public class Game_aggregate_with_no_events_will : AggregateSpecification<GameLobbyAggregate, CreateGame>
     {
         private readonly ILogger _output;
 
-        public GameAggregateCreateGameSpec(ITestOutputHelper helper)
+        public Game_aggregate_with_no_events_will(ITestOutputHelper helper)
         {
             _output = new LoggerConfiguration()
                 .MinimumLevel.Verbose()
@@ -26,21 +26,23 @@ namespace TheBeerGame.GameEngine.Spec
 
         public override CreateGame When()
         {
-            return new CreateGame();
+            return new CreateGame("gameId");
         }
 
         public override GameLobbyAggregate CreateAggregateRoot()
         {
-            return new GameLobbyAggregate(_output);
+            return new GameLobbyAggregate();
         }
 
 
         [Fact]
-        public void Create_Game_When_No_History()
+        public void Successfully_Create_Game()
         {
-            Assert.Null(Exception);
-            Assert.Single(Result);
-            var e = Result.First();
+            var events = Whenxecute();
+            var e = events.First();
+            Assert.IsType<GameCreated>(e);
+            var gc = (GameCreated) e;
+            Assert.Equal("gameId",gc.GameId);
         }
     }
 }

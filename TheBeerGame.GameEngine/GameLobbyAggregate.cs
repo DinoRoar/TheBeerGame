@@ -1,17 +1,31 @@
-﻿using Serilog;
+﻿using System;
 
 namespace TheBeerGame.GameEngine
 {
-    public class GameLobbyAggregate : AggregateRoot, IHandle<CreateGame>
+    public class GameLobbyAggregate : AggregateRoot
+        , IHandle<CreateGame>
+        , IApply<GameCreated>
     {
+        private bool _gameCreated = false;
+
+        public void Apply(GameCreated @event)
+        {
+            _gameCreated = true;
+        }
+
         public void Handle(CreateGame command)
         {
+            if (_gameCreated) throw new GameAlreadyCreatedException(command.GameId);
             var gameCreated = new GameCreated(command);
             Uncommitted.Add(gameCreated);
         }
 
-        public GameLobbyAggregate(ILogger logger) : base(logger)
+        public class GameAlreadyCreatedException : Exception
         {
+            public GameAlreadyCreatedException(string gameId) : base($"Game already created: {gameId}")
+            {
+
+            }
         }
     }
 }

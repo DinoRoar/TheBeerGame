@@ -7,27 +7,16 @@ namespace TheBeerGame.GameEngine.Spec
         where TAggregate : AggregateRoot, IHandle<TCommand>
         where TCommand : Command
     {
-        protected IEnumerable<Event> Result;
-        protected Exception Exception;
-
         public abstract IEnumerable<Event> Given();
         public abstract TCommand When();
         public abstract TAggregate CreateAggregateRoot();
 
-        protected AggregateSpecification()
+        public List<Event> Whenxecute()
         {
-            try
-            {
-                var sut = CreateAggregateRoot();
-                sut.Apply(Given());
-                sut.Handle(When());
-                Result = sut.GetUncommittedEvents();
-            }
-            catch (Exception ex)
-            {
-                Exception = ex;
-            }
+            var sut = CreateAggregateRoot();
+            sut.Apply(Given());
+            sut.Handle(When());
+            return sut.GetUncommittedEvents();
         }
-
     }
 }
