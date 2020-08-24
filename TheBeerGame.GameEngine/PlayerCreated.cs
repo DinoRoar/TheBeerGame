@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using TheBeerGame.GameEngine.LoginMessages;
 
 namespace TheBeerGame.GameEngine
 {

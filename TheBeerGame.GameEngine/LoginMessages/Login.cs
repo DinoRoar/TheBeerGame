@@ -1,4 +1,4 @@
-﻿namespace TheBeerGame.GameEngine
+﻿namespace TheBeerGame.GameEngine.LoginMessages
 {
     public class Login : Command
     {

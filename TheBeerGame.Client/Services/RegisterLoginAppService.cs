@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using TheBeerGame.EventStore;
 using TheBeerGame.GameEngine;
+using TheBeerGame.GameEngine.LoginMessages;
 
 namespace TheBeerGame.Client.Services
 {
