@@ -5,9 +5,11 @@ VisualStudioVersion = 16.0.30320.27
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheBeerGame.GameEngine.Spec", "TheBeerGame.GameEngine.Spec\TheBeerGame.GameEngine.Spec.csproj", "{EB285586-3841-48A3-BBD5-9BC7C307BFC6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheBeerGame.Client", "TheBeerGame.Client\TheBeerGame.Client.csproj", "{BAD6BBFB-F337-4CD6-A835-2E8F87359A80}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheBeerGame.Client", "TheBeerGame.Client\TheBeerGame.Client.csproj", "{BAD6BBFB-F337-4CD6-A835-2E8F87359A80}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheBeerGame.GameEngine", "TheBeerGame.GameEngine\TheBeerGame.GameEngine.csproj", "{335E0C80-960D-423E-B0DD-3C02BD98A899}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheBeerGame.GameEngine", "TheBeerGame.GameEngine\TheBeerGame.GameEngine.csproj", "{335E0C80-960D-423E-B0DD-3C02BD98A899}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheBeerGame.EventStore", "TheBeerGame.EventStore\TheBeerGame.EventStore.csproj", "{E17DB4AE-8681-41F2-8305-9763E8FEBF01}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{335E0C80-960D-423E-B0DD-3C02BD98A899}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{335E0C80-960D-423E-B0DD-3C02BD98A899}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{335E0C80-960D-423E-B0DD-3C02BD98A899}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E17DB4AE-8681-41F2-8305-9763E8FEBF01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E17DB4AE-8681-41F2-8305-9763E8FEBF01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E17DB4AE-8681-41F2-8305-9763E8FEBF01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E17DB4AE-8681-41F2-8305-9763E8FEBF01}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

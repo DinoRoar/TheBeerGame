@@ -3,9 +3,10 @@
     public class Login : Command
     {
         public string PlayerName { get; }
-        public string Password { get; }
+        public Password Password { get; }
 
-        public Login(string playerName, string password)
+
+        public Login(string playerName, Password password)
         {
             PlayerName = playerName;
             Password = password;
