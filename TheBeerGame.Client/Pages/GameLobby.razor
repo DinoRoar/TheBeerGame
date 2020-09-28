@@ -1,0 +1,36 @@
+﻿@page "/game/lobby"
+
+@attribute [Authorize]
+
+@using TheBeerGame.Client.Data;
+@inject GameLobbyService GameLobbyService;
+
+@if (_games == null)
+{
+    <p> Loading ...</p>
+}
+else
+{
+    <h1>Running Games</h1>
+
+    <ul>
+        @foreach (var game in _games)
+        {
+            <li>@game.Game</li>
+        }
+    </ul>
+
+    @*<p>Current count: @currentCount</p>
+
+        <button class="btn btn-primary" @onclick="IncrementCount">Click me</button>*@
+}
+
+@code {
+    List<RunningGame> _games;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _games = await GameLobbyService.GetRunningGames();
+    }
+
+}

@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheBeerGame.Client", "TheBe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheBeerGame.GameEngine", "TheBeerGame.GameEngine\TheBeerGame.GameEngine.csproj", "{335E0C80-960D-423E-B0DD-3C02BD98A899}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheBeerGame.EventStore", "TheBeerGame.EventStore\TheBeerGame.EventStore.csproj", "{E17DB4AE-8681-41F2-8305-9763E8FEBF01}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheBeerGame.EventStore", "TheBeerGame.EventStore\TheBeerGame.EventStore.csproj", "{E17DB4AE-8681-41F2-8305-9763E8FEBF01}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

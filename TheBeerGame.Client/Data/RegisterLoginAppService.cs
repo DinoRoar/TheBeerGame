@@ -3,7 +3,7 @@ using TheBeerGame.EventStore;
 using TheBeerGame.GameEngine;
 using TheBeerGame.GameEngine.LoginMessages;
 
-namespace TheBeerGame.Client.Services
+namespace TheBeerGame.Client.Data
 {
     public class RegisterLoginAppService
     {

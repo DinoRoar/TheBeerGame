@@ -1,0 +1,16 @@
+﻿<AuthorizeView>
+    <NotAuthorized>
+        <a href="login?redirectUri=/">Log in</a>
+    </NotAuthorized>
+    <Authorizing>
+        <h1>Authentication in progress</h1>
+        <p>hamsters running</p>
+    </Authorizing>
+    <Authorized>
+        <a href="logout">Log out</a>
+    </Authorized>
+</AuthorizeView>
+
+@code {
+
+}
