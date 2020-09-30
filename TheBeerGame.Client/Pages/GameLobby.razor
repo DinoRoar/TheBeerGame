@@ -5,6 +5,8 @@
 @using TheBeerGame.Client.Data;
 @inject GameLobbyService GameLobbyService;
 
+<p>username: @_userName</p>
+
 @if (_games == null)
 {
     <p> Loading ...</p>
@@ -28,9 +30,20 @@ else
 @code {
     List<RunningGame> _games;
 
+    [CascadingParameter]
+    private Task<AuthenticationState> authenticationStateTask { get; set; }
+
+    string _userName;
+
     protected override async Task OnInitializedAsync()
     {
         _games = await GameLobbyService.GetRunningGames();
+
+        var authenticationState = await authenticationStateTask;
+        var user = authenticationState.User;
+        _userName = user.Identity.Name;
+
+
     }
 
 }
