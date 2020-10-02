@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using TheBeerGame.EventStore;
 
 namespace TheBeerGame.GameEngine
 {

@@ -2,6 +2,7 @@
 using Serilog;
 using Serilog.Core;
 using Serilog.Events;
+using TheBeerGame.EventStore;
 using TheBeerGame.GameEngine.ReadModels;
 using Xunit;
 using Xunit.Abstractions;

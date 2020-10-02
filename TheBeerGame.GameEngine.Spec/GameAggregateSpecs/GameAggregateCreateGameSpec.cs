@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Serilog;
 using Serilog.Events;
+using TheBeerGame.EventStore;
 using Xunit;
 using Xunit.Abstractions;
 

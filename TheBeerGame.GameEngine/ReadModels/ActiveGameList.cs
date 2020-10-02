@@ -17,13 +17,4 @@ namespace TheBeerGame.GameEngine.ReadModels
         {
         }
     }
-
-
-
-    public class InMemoryReadModel : Projection
-    {
-        public InMemoryReadModel(ILogger logger) : base()
-        {
-        }
-    }
 }

@@ -1,4 +1,6 @@
-﻿namespace TheBeerGame.GameEngine
+﻿using TheBeerGame.EventStore;
+
+namespace TheBeerGame.GameEngine
 {
     public class CreateGame : Command
     {

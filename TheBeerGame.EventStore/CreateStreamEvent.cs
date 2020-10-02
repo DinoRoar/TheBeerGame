@@ -1,4 +1,4 @@
-﻿using TheBeerGame.GameEngine;
+﻿
 
 namespace TheBeerGame.EventStore
 {

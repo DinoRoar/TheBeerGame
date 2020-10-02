@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TheBeerGame.GameEngine
+namespace TheBeerGame.EventStore
 {
     public class HasId
     {

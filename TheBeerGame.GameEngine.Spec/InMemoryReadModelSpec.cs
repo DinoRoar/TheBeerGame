@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using TheBeerGame.EventStore;
 using TheBeerGame.GameEngine.ReadModels;
 
 namespace TheBeerGame.GameEngine.Spec

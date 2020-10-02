@@ -1,6 +1,5 @@
 ﻿using System;
 using Newtonsoft.Json;
-using TheBeerGame.GameEngine;
 
 namespace TheBeerGame.EventStore
 {

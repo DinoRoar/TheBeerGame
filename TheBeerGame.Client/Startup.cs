@@ -13,6 +13,7 @@ using TheBeerGame.Client.Data;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
+using TheBeerGame.EventStore;
 
 namespace TheBeerGame.Client
 {
@@ -32,8 +33,13 @@ namespace TheBeerGame.Client
 
             services.AddRazorPages();
             services.AddServerSideBlazor();
+
+            services.AddSingleton<IEventStore, InMemoryEventStore>();
+
             services.AddSingleton<WeatherForecastService>();
             services.AddSingleton<GameLobbyService>();
+            services.AddSingleton<AccountService>();
+            
 
             services.Configure<CookiePolicyOptions>(options =>
             {

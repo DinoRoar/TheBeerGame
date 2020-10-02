@@ -1,4 +1,6 @@
-﻿namespace TheBeerGame.GameEngine.LoginMessages
+﻿using TheBeerGame.EventStore;
+
+namespace TheBeerGame.GameEngine.LoginMessages
 {
     public class LoginFailed : Event
     {

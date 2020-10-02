@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using TheBeerGame.EventStore;
 
 namespace TheBeerGame.GameEngine.Spec
 {

@@ -40,8 +40,9 @@ else
         _games = await GameLobbyService.GetRunningGames();
 
         var authenticationState = await authenticationStateTask;
-        var user = authenticationState.User;
-        _userName = user.Identity.Name;
+        
+        var userName = authenticationState.User.Claims.First().Value;
+        _userName = userName;
 
 
     }

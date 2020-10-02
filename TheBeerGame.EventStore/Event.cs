@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace TheBeerGame.GameEngine
+namespace TheBeerGame.EventStore
 {
     public class Event : Message
     {

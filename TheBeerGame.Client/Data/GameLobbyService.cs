@@ -1,10 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
+using TheBeerGame.EventStore;
 using TheBeerGame.GameEngine;
+using TheBeerGame.GameEngine.Accounts;
 
 namespace TheBeerGame.Client.Data
 {
+    public class AccountService
+    {
+        private readonly IEventStore _eventStore;
+
+        public AccountService(IEventStore eventStore)
+        {
+            _eventStore = eventStore;
+        }
+
+        public ResultOrError<GameCreated> CreateGame(string gameId)
+        {
+            var correlationId = Guid.NewGuid().ToString();
+            return new ResultOrError<GameCreated>(new GameCreated(gameId, "id", correlationId, correlationId));
+        }
+
+        public Task<Option<UserAccount>> HandleUserLoggedIn(string oAuthId)
+        {
+
+            return Task.FromResult(new Option<UserAccount>());
+        }
+    }
+
+
+  
+
+
     public class GameLobbyService
     {
         public ResultOrError<GameCreated> CreateGame(string gameId)

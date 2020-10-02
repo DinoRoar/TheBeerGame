@@ -2,6 +2,7 @@
 using System.Linq;
 using Serilog;
 using Serilog.Events;
+using TheBeerGame.EventStore;
 using TheBeerGame.GameEngine.LoginMessages;
 using Xunit;
 using Xunit.Abstractions;
