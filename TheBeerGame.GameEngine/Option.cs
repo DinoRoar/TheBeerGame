@@ -1,4 +1,5 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace TheBeerGame.GameEngine
 {
@@ -6,7 +7,7 @@ namespace TheBeerGame.GameEngine
     {
         public Option([NotNull] T value)
         {
-            Value = value;
+            Value = value ?? throw new ArgumentNullException(nameof(value));
             HasValue = true;
         }
 
@@ -15,7 +16,7 @@ namespace TheBeerGame.GameEngine
             HasValue = false;
         }
 
-        public T Value { get; }
+        public T Value { get; } = default!;
         public bool HasValue { get; }
     }
 }

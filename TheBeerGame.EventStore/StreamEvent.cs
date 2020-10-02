@@ -11,20 +11,20 @@ namespace TheBeerGame.EventStore
         public DateTime CreatedDate { get; }
         public Event Event { get; }
 
-        public Event GetOriginatingEvent => GetOriginatingEventInternal(Event);
+        public Event GetOriginatingEvent => GetOriginatingEventInternal(this);
         public long GetOriginatingStreamPosition => GetOriginatingStreamPositionInternal(this);
 
-        private static Event GetOriginatingEventInternal(Event @event)
+        private static StreamEvent GetOriginatingEventInternal(StreamEvent @event)
         {
             if (EventIsExternal(@event))
             {
                 return @event;
             }
 
-            return GetOriginatingEventInternal(((StreamEvent)@event).Event);
+            return GetOriginatingEventInternal((StreamEvent)@event.Event);
         }
 
-        private static bool EventIsExternal(Event @event)
+        private static bool EventIsExternal(StreamEvent @event)
         {
             return @event.GetType() != typeof(StreamEvent) && @event.GetType() != typeof(ProjectedEvent);
         }

@@ -7,7 +7,7 @@ namespace TheBeerGame.GameEngine.ReadModels
     public class ActiveGameList : InMemoryReadModel
     {
         
-        public ActiveGameList(ILogger logger) : base(logger)
+        public ActiveGameList(ILogger logger) : base()
         {
         }
 

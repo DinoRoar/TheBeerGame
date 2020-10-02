@@ -6,13 +6,35 @@ namespace TheBeerGame.GameEngine
 {
     public class Projection
     {
-        public virtual void Apply(IEnumerable<Event> events)
+        protected long LastEventSeen = -1;
+
+        public void Apply(IEnumerable<StreamEvent> events)
         {
             foreach (var @event in events)
             {
-                var type = this.GetType();
-                type.InvokeMember("Apply", BindingFlags.InvokeMethod, null, this, new object?[] { @event });
+                ApplyEvent(@event);
             }
+        }
+
+        public void Apply(IEnumerable<Event> events)
+        {
+            foreach (var @event in events)
+            {
+                ApplyEvent(@event);
+            }
+        }
+
+        private void ApplyEvent(StreamEvent @event)
+        {
+            var e = @event.GetOriginatingEvent;
+            ApplyEvent(e);
+            LastEventSeen = @event.StreamPosition;
+        }
+
+        protected void ApplyEvent(Event @event)
+        {
+            var type = this.GetType();
+            type.InvokeMember("Apply", BindingFlags.InvokeMethod, null, this, new object?[] {@event});
         }
 
         public void Apply(Event _)

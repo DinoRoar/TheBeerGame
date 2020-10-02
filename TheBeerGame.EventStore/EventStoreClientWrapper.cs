@@ -1,16 +1,50 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using EventStore.ClientAPI;
-using TheBeerGame.EventStore;
+using Microsoft.Extensions.Logging;
 
-namespace TheBeerGame.Dave
+//using EventStore.ClientAPI;
+
+namespace TheBeerGame.EventStore
 {
-    class EventStoreClientWrapper : IEventStore
+    public class EventStoreClientWrapper : IEventStore
     {
-        public EventStoreClientWrapper()
+        private readonly IEventStoreConnection _client;
+
+        public EventStoreClientWrapper(ILogger<EventStoreClientWrapper> logger)
         {
-            //var client = EventStoreConnection.Create(new Uri())
+            _client = EventStoreConnection.Create(new Uri("tcp://admin:changeit@localhost:1113"));
+            _client.Connected += (sender, args) =>
+            {
+                logger.LogInformation("Eventstore connected");
+            };
+
+            _client.ErrorOccurred += (sender, args) =>
+            {
+                logger.LogError(args.Exception, "eventstore error occured");
+            };
+
+            _client.AuthenticationFailed += (sender, args) =>
+            {
+                logger.LogError("Eventstore Authentication failed {reason}", args.Reason);
+            };
+
+            _client.Closed += (sender, args) =>
+            {
+                logger.LogInformation("Evenstore connection closed: {reason}", args.Reason);
+            };
+
+            _client.Disconnected += (sender, args) =>
+            {
+                logger.LogInformation("Eventstore disconnected: {reason}", args.RemoteEndPoint);
+            };
+
+            _client.Reconnecting += (sender, args) =>
+            {
+                logger.LogInformation("Eventstore reconnecting");
+            };
+
+            _client.ConnectAsync().Wait();
         }
         public void Append(IEnumerable<CreateStreamEvent> createStreamEvent)
         {

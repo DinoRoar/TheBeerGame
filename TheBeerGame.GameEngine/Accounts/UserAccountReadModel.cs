@@ -1,16 +1,12 @@
 ﻿using System.Collections.Generic;
-using Serilog;
+using TheBeerGame.EventStore;
 
 
 namespace TheBeerGame.GameEngine.Accounts
 {
-    public class UserAccountReadModel : InMemoryReadModel, IApply<UserAccountCreated>
+    public class UserAccountReadModel : SubscribedProjection, IApply<UserAccountCreated>
     {
         private readonly Dictionary<string, UserAccount> _accounts = new Dictionary<string, UserAccount>();
-
-        public UserAccountReadModel(ILogger logger) : base(logger)
-        {
-        }
 
         public Option<UserAccount> GetAccount(string auth0Name)
         {
@@ -22,6 +18,10 @@ namespace TheBeerGame.GameEngine.Accounts
         public void Apply(UserAccountCreated @event)
         {
             _accounts.Add(@event.Token, new UserAccount(@event.Token, @event.UserName));
+        }
+
+        public UserAccountReadModel(IEventStore eventStore) : base(eventStore, "ca-userAccount")
+        {
         }
     }
 }

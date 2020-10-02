@@ -1,23 +1,30 @@
-﻿using Serilog;
-using TheBeerGame.EventStore;
+﻿using TheBeerGame.EventStore;
 
 namespace TheBeerGame.GameEngine
 {
-    public class SubscribedProjection : Projection
+    public abstract class SubscribedProjection : Projection
     {
         private readonly IEventStore _eventStore;
+        private readonly string _streamName;
 
-        public SubscribedProjection(IEventStore eventStore)
+        protected SubscribedProjection(IEventStore eventStore, string streamName)
         {
             _eventStore = eventStore;
+            _streamName = streamName;
+        }
+
+        public void Start()
+        {
+            _eventStore.SubscribeToStream(_streamName, @event =>
+            {
+                var e = @event.GetOriginatingEvent;
+                ApplyEvent(@event.GetOriginatingEvent);
+            });
         }
 
     }
 
     public class InMemoryReadModel : Projection
     {
-        public InMemoryReadModel(ILogger logger) : base()
-        {
-        }
     }
 }

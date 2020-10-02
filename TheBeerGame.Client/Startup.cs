@@ -13,6 +13,7 @@ using TheBeerGame.Client.Data;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
+using Serilog;
 using TheBeerGame.EventStore;
 
 namespace TheBeerGame.Client
@@ -34,7 +35,11 @@ namespace TheBeerGame.Client
             services.AddRazorPages();
             services.AddServerSideBlazor();
 
-            services.AddSingleton<IEventStore, InMemoryEventStore>();
+            
+            var logger = new SerilogTypedLogger<EventStoreClientWrapper>(Serilog.Log.Logger);
+            var eventStore = new EventStoreClientWrapper(logger);
+
+            services.AddSingleton<IEventStore>(eventStore);
 
             services.AddSingleton<WeatherForecastService>();
             services.AddSingleton<GameLobbyService>();
