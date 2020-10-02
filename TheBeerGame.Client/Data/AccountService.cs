@@ -26,6 +26,7 @@ namespace TheBeerGame.Client.Data
             agg.Apply(events);
 
             agg.Handle(new CreateAccount(userName, oAuthId));
+            _eventStore.Append(agg.GetUncommittedEvents());
             return Task.CompletedTask;
         }
 

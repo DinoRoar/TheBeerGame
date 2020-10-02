@@ -37,5 +37,9 @@ namespace TheBeerGame.GameEngine
             _registered = true;
             _password = @event.PasswordHash;
         }
+
+        public Player() : base("player")
+        {
+        }
     }
 }

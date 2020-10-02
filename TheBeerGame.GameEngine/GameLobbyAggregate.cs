@@ -27,5 +27,9 @@ namespace TheBeerGame.GameEngine
 
             }
         }
+
+        public GameLobbyAggregate() : base("gameLobby")
+        {
+        }
     }
 }

@@ -5,6 +5,10 @@
     {
         private Option<UserAccount> _user = new Option<UserAccount>();
 
+        public CreateAccountHandler() : base("userAccount")
+        {
+        }
+
         public void Handle(CreateAccount command)
         {
             if (!_user.HasValue)
@@ -17,5 +21,7 @@
         {
             _user = new Option<UserAccount>(new UserAccount(@event.UserName, @event.Token));
         }
+
+
     }
 }

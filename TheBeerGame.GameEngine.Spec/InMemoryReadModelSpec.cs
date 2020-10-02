@@ -4,7 +4,7 @@ using TheBeerGame.GameEngine.ReadModels;
 
 namespace TheBeerGame.GameEngine.Spec
 {
-    public abstract class InMemoryReadModelSpec<TReadModel> where TReadModel : InMemoryReadModel
+    public abstract class InMemoryReadModelSpec<TReadModel> where TReadModel : Projection
     {
         public abstract IEnumerable<Event> Given();
         public abstract IEnumerable<Event> When();

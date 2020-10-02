@@ -21,7 +21,6 @@ namespace TheBeerGame.GameEngine
                 ApplyEvent(@event.GetOriginatingEvent);
             });
         }
-
     }
 
     public class InMemoryReadModel : Projection

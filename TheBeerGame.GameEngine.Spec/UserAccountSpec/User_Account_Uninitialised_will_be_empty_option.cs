@@ -26,7 +26,7 @@ namespace TheBeerGame.GameEngine.Spec.UserAccountSpec
 
         public override IEnumerable<Event> When() => new List<Event>();
 
-        public override UserAccountReadModel Factory() => new UserAccountReadModel();
+        public override UserAccountReadModel Factory() => new UserAccountReadModel(new InMemoryEventStore());
 
         [Fact]
         public void WillReturnEmptyOptionIfAccountDoesNotExist()
@@ -53,7 +53,7 @@ namespace TheBeerGame.GameEngine.Spec.UserAccountSpec
 
         public override IEnumerable<Event> When() => new List<Event>();
 
-        public override UserAccountReadModel Factory() => new UserAccountReadModel();
+        public override UserAccountReadModel Factory() => new UserAccountReadModel(new InMemoryEventStore());
 
         [Fact]
         public void Return_the_account()

@@ -154,7 +154,7 @@ namespace TheBeerGame.EventStore
                 var stream = _streams[streamName];
                 if (stream.Count < position)
                 {
-                    throw new StreamToShortException(streamName);
+                    throw new StreamTooShortException(streamName);
                 }
                 var streamEvents = stream.Skip(position);
                 foreach (var streamEvent in streamEvents)
