@@ -1,7 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Text.Unicode;
+using System.Threading.Tasks;
 using EventStore.ClientAPI;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 
 //using EventStore.ClientAPI;
 
@@ -46,12 +51,24 @@ namespace TheBeerGame.EventStore
 
             _client.ConnectAsync().Wait();
         }
-        public void Append(IEnumerable<CreateStreamEvent> createStreamEvent)
+        public async Task Append(EventsToWrite eventsToWrite)
+        {
+           
+            foreach (var @event in eventsToWrite.Events)
+            {
+                var eventBytes = UTF8Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(@event));
+                var eventMetaData = UTF8Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(new EventMetaData(@event)));
+                var eventData = new EventData(Guid.NewGuid(),@event.Type,true,  eventBytes, eventMetaData);
+                await _client.AppendToStreamAsync(eventsToWrite.StreamName, eventsToWrite.NextEventPosition, eventData);
+            }
+        }
+
+        private EventMetaData ToMetaData(Event @event)
         {
             throw new NotImplementedException();
         }
 
-        public void Append(CreateStreamEvent createStreamEvent)
+        public Task Append(CreateStreamEvent createStreamEvent)
         {
             throw new NotImplementedException();
         }
@@ -80,5 +97,28 @@ namespace TheBeerGame.EventStore
         {
             throw new NotImplementedException();
         }
+    }
+
+    public class EventMetaData
+    {
+        public EventMetaData()
+        {
+        }
+
+        public EventMetaData(Event @event)
+        {
+            Id = @event.Id;
+            CorrelationId = @event.CorrelationId;
+            CausationId = @event.CausationId;
+            CreatedOn = @event.CreatedOn;
+        }
+
+        public DateTime CreatedOn { get; set; }
+
+        public string CausationId { get; set; }
+
+        public string CorrelationId { get; set; }
+
+        public string Id { get; set; }
     }
 }

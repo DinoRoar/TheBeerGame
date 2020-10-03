@@ -14,7 +14,7 @@ namespace TheBeerGame.GameEngine.Accounts
         }
 
         [JsonConstructor]
-        public CreateAccount(string id, string correlationId, string causationId, string userName, string token) : base(id, correlationId, causationId)
+        public CreateAccount(string id, string correlationId, string causationId, string userName, string token, DateTime createdOn) : base(id, correlationId, causationId, createdOn)
         {
             UserName = userName;
             Token = token;

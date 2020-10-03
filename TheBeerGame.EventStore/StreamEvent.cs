@@ -68,7 +68,7 @@ namespace TheBeerGame.EventStore
         [JsonConstructor]
         public StreamEvent(string id, string streamName, in long streamPosition, in long globalPosition,
             in DateTime createdDate, Event @event, string correlationId, string causationId) 
-            : base(id, correlationId, causationId)
+            : base(id, correlationId, causationId, createdDate)
         {
             StreamName = streamName;
             StreamPosition = streamPosition;

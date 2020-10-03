@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 using TheBeerGame.EventStore;
 
@@ -12,7 +13,7 @@ namespace TheBeerGame.GameEngine
         }
 
         [JsonConstructor]
-        public GameCreated(string gameId, string id, string correlationId, string causationId) : base(id, correlationId, causationId)
+        public GameCreated(string gameId, string id, string correlationId, string causationId, DateTime createdOn) : base(id, correlationId, causationId, createdOn)
         {
             GameId = gameId;
         }

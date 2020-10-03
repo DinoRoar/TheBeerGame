@@ -1,13 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 
 namespace TheBeerGame.EventStore
 {
+    public class EventsToWrite : IHaveStreamName
+    {
+        public EventsToWrite(long nextEventPosition, string streamName, List<Event> eventsToWrite)
+        {
+            NextEventPosition = nextEventPosition;
+            StreamName = streamName;
+            Events = eventsToWrite;
+        }
+
+        public long NextEventPosition { get; }
+        public string StreamName { get; }
+        public List<Event> Events { get; }
+    }
+
     public interface IEventStore
     {
-        void Append(IEnumerable<CreateStreamEvent> createStreamEvent);
-        void Append(CreateStreamEvent createStreamEvent);
+        Task Append(EventsToWrite createStreamEvent);
 
         void AddNewProjection(Projection projection);
 

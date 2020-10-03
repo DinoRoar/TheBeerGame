@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Serilog;
@@ -32,7 +33,7 @@ namespace TheBeerGame.GameEngine.Spec.GameAggregateSpecs
 
         public override GameLobbyAggregate CreateAggregateRoot()
         {
-            return new GameLobbyAggregate();
+            return new GameLobbyAggregate(DateTime.Today.ToShortDateString());
         }
 
 

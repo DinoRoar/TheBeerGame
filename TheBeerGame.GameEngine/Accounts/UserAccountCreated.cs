@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 using TheBeerGame.EventStore;
 
 namespace TheBeerGame.GameEngine.Accounts
@@ -12,8 +13,8 @@ namespace TheBeerGame.GameEngine.Accounts
         }
 
         [JsonConstructor]
-        public UserAccountCreated(string id, string correlationId, string causationId, string token, string userName)
-            : base(id, correlationId, causationId)
+        public UserAccountCreated(string id, string correlationId, string causationId, string token, string userName, DateTime createdOn)
+            : base(id, correlationId, causationId, createdOn)
         {
             Token = token;
             UserName = userName;

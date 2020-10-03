@@ -1,20 +1,61 @@
 ﻿@page "/account"
 @using TheBeerGame.Client.Data
+@using TheBeerGame.GameEngine
+@using TheBeerGame.GameEngine.Accounts
+@using System.ServiceModel.Security
 
 @attribute [Authorize]
 
 
-@inject GameLobbyService GameLobbyService;
+@inject AccountService AccountService;
 
 <h3>Account</h3>
+@if (_initialized)
+{
+    <div>{_user.UserName}</div>
+}
+else
+{
+    <div>not initialised</div>
+}
+
 
 @code {
 
+    [CascadingParameter]
+    private Task<AuthenticationState> authenticationStateTask { get; set; }
+
+    private UserAccountModel _user;
+    private bool _initialized = false;
 
     protected override async Task OnInitializedAsync()
     {
+        var authenticationState = await authenticationStateTask;
+
+        var userName = authenticationState.User.Claims.First().Value;
+
+        var user = await AccountService.HandleUserLoggedIn(userName);
+        if (user.HasValue)
+        {
+            _initialized = true;
+            _user = new UserAccountModel(user.Value);
+        }
+
+    }
 
 
+    private class UserAccountModel
+    {
+        public UserAccountModel(UserAccount user)
+        {
+            UserName = user.UserName;
+            Token = user.Auth0Id;
+
+        }
+
+        public string Token { get; set; }
+
+        public string UserName { get; set; }
     }
 
 }

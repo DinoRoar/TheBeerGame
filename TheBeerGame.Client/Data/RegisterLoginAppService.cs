@@ -23,18 +23,18 @@ namespace TheBeerGame.Client.Data
 
             var streamName = $"user-{userName}";
             var events = _eventStore.ReadStream(streamName);
-            var agg = new Player();
+            var agg = new Player(userName);
             agg.Apply(events);
 
             agg.Handle(new Login(userName, p));
-            var uncommitted = agg.GetUncommittedEvents();
+            var uncommitted = agg.GetEventsToWrite();
 
-            var @event = uncommitted.First();
+            var @event = uncommitted.Events.First();
             if (@event.GetType() == typeof(PlayerCreated))
             {
                 retVal = new LoginResult(true);
             }
-            _eventStore.Append(uncommitted.Select(u => new CreateStreamEvent(streamName, StreamPositions.Any, u)));
+            _eventStore.Append(uncommitted);
 
             return retVal;
         }

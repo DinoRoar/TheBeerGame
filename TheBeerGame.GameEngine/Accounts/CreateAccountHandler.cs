@@ -5,7 +5,7 @@
     {
         private Option<UserAccount> _user = new Option<UserAccount>();
 
-        public CreateAccountHandler() : base("userAccount")
+        public CreateAccountHandler(string id) : base("userAccount", id)
         {
         }
 

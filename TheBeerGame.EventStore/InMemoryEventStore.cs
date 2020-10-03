@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace TheBeerGame.EventStore
 {
@@ -25,44 +26,44 @@ namespace TheBeerGame.EventStore
             AddNewProjection(new EventTypeProjection());
         }
 
-        public void Append(IEnumerable<CreateStreamEvent> streamEvents)
-        {
-            foreach (var createStreamEvent in streamEvents)
-            {
-                Append(createStreamEvent);
-            }
-        }
-
-        public void Append(CreateStreamEvent createStreamEvent)
+        public Task Append(EventsToWrite eventsToWrite)
         {
             _writeMutex.WaitOne(TimeSpan.FromSeconds(1));
             try
             {
                 var nextGlobalEventVersion = _allEvents.Count;
-                var streamPosition = GetStreamPosition(createStreamEvent);
+                var streamPosition = GetStreamPosition(eventsToWrite);
 
                 if (streamPosition == StreamPositions.DoesNotExist)
                 {
-                    _streams.Add(createStreamEvent.StreamName, new List<StreamEvent>());
+                    _streams.Add(eventsToWrite.StreamName, new List<StreamEvent>());
                     streamPosition = 0;
                 }
 
-                if (createStreamEvent.StreamPosition != StreamPositions.Any)
+                if (eventsToWrite.NextEventPosition != StreamPositions.Any)
                 {
-                    CheckStreamPosition(createStreamEvent, streamPosition);
+                    CheckStreamPosition(eventsToWrite.NextEventPosition, streamPosition, eventsToWrite.StreamName);
                 }
 
-                var @event = new StreamEvent(createStreamEvent, streamPosition, nextGlobalEventVersion);
-                _streams[createStreamEvent.StreamName].Add(@event);
-                _allEvents.Add(@event);
+                var events = eventsToWrite.Events.Select((e, i) => new StreamEvent(eventsToWrite.StreamName,
+                    eventsToWrite.NextEventPosition + i, StreamPositions.Any, e.CreatedOn, e));
 
-                ExecuteSubscriptions(@event);
-                RunProjections(@event);
+                foreach (var @event in events)
+                {
+                    _streams[eventsToWrite.StreamName].Add(@event);
+                    _allEvents.Add(@event);
+
+                    ExecuteSubscriptions(@event);
+                    RunProjections(@event);
+                }
             }
             finally
             {
                 _writeMutex.ReleaseMutex();
+               
             }
+
+            return Task.CompletedTask;
         }
 
         private void Append(ProjectedEvent projectedEvent)
@@ -190,17 +191,17 @@ namespace TheBeerGame.EventStore
             return new StreamPositions(lastEvent.StreamPosition + 1, lastEvent.GlobalPosition + 1);
         }
 
-        private static void CheckStreamPosition(CreateStreamEvent streamEvent, long currentPosition)
+        private static void CheckStreamPosition(long nextEventPosition, long currentPosition, string streamName)
         {
-            switch (streamEvent.StreamPosition)
+            switch (nextEventPosition)
             {
                 case StreamPositions.CreateNewStream:
                 {
                     if (currentPosition != 0)
                     {
                         throw new IEventStore.InvalidStreamPosition(
-                            streamEvent.StreamName,
-                            streamEvent.StreamPosition,
+                            streamName,
+                            nextEventPosition,
                             currentPosition);
                     }
 
@@ -212,11 +213,11 @@ namespace TheBeerGame.EventStore
                 }
                 default:
                 {
-                    if (streamEvent.StreamPosition != currentPosition)
+                    if (nextEventPosition != currentPosition+1)
                     {
                         throw new IEventStore.InvalidStreamPosition(
-                            streamEvent.StreamName,
-                            streamEvent.StreamPosition,
+                            streamName,
+                            nextEventPosition,
                             currentPosition);
                     }
 

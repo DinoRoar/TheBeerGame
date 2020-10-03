@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Serilog;
 using Serilog.Events;
 using TheBeerGame.EventStore;
@@ -24,7 +25,7 @@ namespace TheBeerGame.GameEngine.Spec.GameAggregateSpecs
         {
             return new List<Event>()
             {
-                new GameCreated("gameId", "id", "correlationId", "causationId")
+                new GameCreated("gameId", "id", "correlationId", "causationId", DateTime.Now)
             };
         }
 
@@ -35,7 +36,7 @@ namespace TheBeerGame.GameEngine.Spec.GameAggregateSpecs
 
         public override GameLobbyAggregate CreateAggregateRoot()
         {
-            return new GameLobbyAggregate();
+            return new GameLobbyAggregate("id");
         }
 
 

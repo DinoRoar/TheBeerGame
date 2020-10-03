@@ -15,7 +15,7 @@ namespace TheBeerGame.GameEngine.Spec.UserAccountSpec
 
         public override CreateAccount When() => _command;
 
-        public override CreateAccountHandler CreateAggregateRoot() => new CreateAccountHandler();
+        public override CreateAccountHandler CreateAggregateRoot() => new CreateAccountHandler("token");
 
         [Fact]
         public void Do_nothing()

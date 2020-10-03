@@ -10,7 +10,7 @@ namespace TheBeerGame.Client.Data
         public ResultOrError<GameCreated> CreateGame(string gameId)
         {
             var correlationId = Guid.NewGuid().ToString();
-            return new ResultOrError<GameCreated>(new GameCreated(gameId, "id", correlationId, correlationId));
+            return new ResultOrError<GameCreated>(new GameCreated(new CreateGame(gameId)));
         }
 
         public Task<List<RunningGame>> GetRunningGames()

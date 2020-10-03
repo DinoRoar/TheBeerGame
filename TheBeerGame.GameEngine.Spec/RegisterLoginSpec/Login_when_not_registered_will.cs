@@ -26,7 +26,7 @@ namespace TheBeerGame.GameEngine.Spec.RegisterLoginSpec
 
         public override Player CreateAggregateRoot()
         {
-            return new Player();
+            return new Player("playerName");
         }
 
         [Fact]

@@ -14,10 +14,10 @@ namespace TheBeerGame.GameEngine.Spec.UserAccountSpec
 
         public override CreateAccount When() => new CreateAccount("userName", "token");
 
-        public override CreateAccountHandler CreateAggregateRoot() => new CreateAccountHandler();
+        public override CreateAccountHandler CreateAggregateRoot() => new CreateAccountHandler("token");
 
         [Fact]
-        public void Sucsessfully_create_user_account()
+        public void Successfully_create_user_account()
         {
             var events = Whenxecute();
             Assert.Single(events);

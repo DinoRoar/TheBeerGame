@@ -1,4 +1,5 @@
-﻿using TheBeerGame.EventStore;
+﻿using System;
+using TheBeerGame.EventStore;
 
 namespace TheBeerGame.GameEngine
 {
@@ -8,7 +9,7 @@ namespace TheBeerGame.GameEngine
         {
         }
 
-        public LoginSucceeded(string id, string correlationId, string causationId) : base(id, correlationId, causationId)
+        public LoginSucceeded(string id, string correlationId, string causationId, DateTime createdOn) : base(id, correlationId, causationId, createdOn)
         {
         }
     }

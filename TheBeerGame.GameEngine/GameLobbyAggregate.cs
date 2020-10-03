@@ -28,7 +28,7 @@ namespace TheBeerGame.GameEngine
             }
         }
 
-        public GameLobbyAggregate() : base("gameLobby")
+        public GameLobbyAggregate(string id) : base("gameLobby", id)
         {
         }
     }

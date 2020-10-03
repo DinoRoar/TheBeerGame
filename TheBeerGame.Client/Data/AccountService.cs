@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using TheBeerGame.EventStore;
 using TheBeerGame.GameEngine;
@@ -21,12 +22,13 @@ namespace TheBeerGame.Client.Data
 
         public Task SetupUser(string oAuthId, string userName)
         {
-            var agg = new CreateAccountHandler();
-            var events = _eventStore.ReadStream(agg.BuildStreamName(oAuthId));
+            var agg = new CreateAccountHandler(oAuthId);
+           
+            var events = _eventStore.ReadStream(agg.StreamName);
             agg.Apply(events);
 
             agg.Handle(new CreateAccount(userName, oAuthId));
-            _eventStore.Append(agg.GetUncommittedEvents());
+            _eventStore.Append(agg.GetEventsToWrite());
             return Task.CompletedTask;
         }
 

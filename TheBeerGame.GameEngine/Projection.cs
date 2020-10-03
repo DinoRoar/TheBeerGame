@@ -6,7 +6,7 @@ namespace TheBeerGame.GameEngine
 {
     public class Projection
     {
-        protected long LastEventSeen = -1;
+        public long LastEventSeen { get; private set; }= -1;
 
         public void Apply(IEnumerable<StreamEvent> events)
         {

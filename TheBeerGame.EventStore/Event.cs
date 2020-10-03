@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 
 namespace TheBeerGame.EventStore
 {
@@ -9,8 +10,10 @@ namespace TheBeerGame.EventStore
         }
 
         [JsonConstructor]
-        public Event(string id, string correlationId, string causationId) : base(id, correlationId, causationId)
+        public Event(string id, string correlationId, string causationId, DateTime createdOn) : base(id, correlationId, causationId, createdOn)
         {
         }
+
+        
     }
 }

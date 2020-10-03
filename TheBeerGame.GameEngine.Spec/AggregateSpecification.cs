@@ -17,7 +17,7 @@ namespace TheBeerGame.GameEngine.Spec
             var sut = CreateAggregateRoot();
             sut.Apply(Given());
             sut.Handle(When());
-            return sut.GetUncommittedEvents();
+            return sut.GetEventsToWrite().Events;
         }
     }
 }

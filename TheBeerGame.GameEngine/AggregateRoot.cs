@@ -5,23 +5,25 @@ using TheBeerGame.EventStore;
 
 namespace TheBeerGame.GameEngine
 {
+
+
     public abstract class AggregateRoot : Projection
     {
-        private readonly string _streamName;
+        public string StreamName { get; }
         protected readonly List<Event> Uncommitted = new List<Event>();
 
    
 
-        protected AggregateRoot(string streamName)
+        protected AggregateRoot(string streamName, string id)
         {
-            _streamName = streamName;
+            StreamName = BuildStreamName(streamName, id);
         }
 
-        public string BuildStreamName(string id) => $"{_streamName}-{id}";
+        public string BuildStreamName(string streamName, string id) => $"{StreamName}-{id}";
 
-        public List<Event> GetUncommittedEvents()
+        public EventsToWrite GetEventsToWrite()
         {
-            return Uncommitted.ToList();
+            return new EventsToWrite(LastEventSeen + 1, StreamName, Uncommitted.ToList());
         }
 
         public void ApplyUncommitted()
